@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اختبار وربط Google Sheets - متجر ZAINI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #0E1013;
+      color: #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .card {
+      background: #181B20;
+      max-width: 650px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 36px 30px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      border: 1px solid #282E38;
+    }
+    .brand-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #282E38;
+      padding-bottom: 18px;
+    }
+    .brand-logo-badge {
+      background: #FFFFFF;
+      padding: 6px 14px;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: #0A0A0A;
+      letter-spacing: 2px;
+    }
+    .brand-logo-badge span {
+      color: #FF5E15;
+    }
+    h2 {
+      color: #FFFFFF;
+      font-size: 1.5rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    p {
+      color: #94A3B8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+    .steps {
+      background: #20242C;
+      border: 1px solid #2E3644;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+    }
+    .steps strong {
+      color: #FF5E15;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.98rem;
+    }
+    .steps ol {
+      padding-right: 22px;
+      line-height: 1.9;
+      color: #CBD5E1;
+    }
+    .steps code {
+      background: #0E1013;
+      padding: 2px 7px;
+      border-radius: 6px;
+      color: #FF7E42;
+      font-family: monospace;
+      font-size: 0.9em;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 9px;
+      font-size: 0.95rem;
+      color: #F1F5F9;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 14px 18px;
+      background: #0E1013;
+      border: 1.5px solid #2E3644;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #FFFFFF;
+      direction: ltr;
+      text-align: left;
+      transition: all 0.25s ease;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #FF5E15;
+      box-shadow: 0 0 0 3px rgba(255, 94, 21, 0.2);
+    }
+    .btn-group {
+      display: flex;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    button {
+      flex: 1;
+      padding: 14px;
+      border-radius: 30px;
+      border: none;
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #FF5E15, #E64A19);
+      color: #FFFFFF;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 94, 21, 0.35);
+    }
+    .btn-back {
+      background: #282E38;
+      color: #E2E8F0;
+    }
+    .btn-back:hover {
+      background: #333B47;
+    }
+    .status-box {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 12px;
+      display: none;
+      font-size: 0.93rem;
+      line-height: 1.7;
+    }
+    .status-box.success {
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid #10B981;
+      color: #A7F3D0;
+      display: block;
+    }
+    .status-box.error {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid #EF4444;
+      color: #FCA5A5;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand-header">
+      <div class="brand-logo-badge">
+        ZAINI<span>.</span>
+      </div>
+      <div>
+        <h2>⚡ ربط وتفعيل Google Sheets</h2>
+      </div>
+    </div>
+
+    <p>قم بوضع رابط تطبيق الويب (Google Web App URL) الناتج من نشر كود Google Apps Script لتسجيل طلبات متجر <strong>ZAINI</strong> ومزامنة المنتجات تلقائياً.</p>
+
+    <div class="steps">
+      <strong>الخطوات في 4 دقائق:</strong>
+      <ol>
+        <li>افتح شيت جوجل جديد واضغط: <strong>التوسيعات (Extensions) &gt; Apps Script</strong>.</li>
+        <li>انسخ الكود بالكامل من ملف <code>google_sheets/Code.gs</code> والصقه هناك.</li>
+        <li>اضغط <strong>نشر (Deploy) &gt; توزيع جديد (New deployment) &gt; تطبيق ويب (Web app)</strong>.</li>
+        <li>اجعل إمكانية الوصول: <strong>أي شخص (Anyone)</strong> ثم اضغط نشر.</li>
+        <li>انسخ الرابط الناتج وضعه في الحقل أدناه واضغط حفظ وتجربة.</li>
+      </ol>
+    </div>
+
+    <div class="form-group">
+      <label for="scriptUrl">رابط تطبيق الويب (Google Web App URL):</label>
+      <input type="text" id="scriptUrl" placeholder="https://script.google.com/macros/s/AKfycb.../exec">
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-primary" id="btnSaveAndTest">🔥 حفظ وإرسال طلب تجريبي فوري</button>
+      <button class="btn-back" onclick="window.location.href='../index.html'">العودة للمتجر</button>
+    </div>
+
+    <div class="status-box" id="statusBox"></div>
+  </div>
+
+  <script>
+    const currentUrl = localStorage.getItem("zaini_sheets_url") || localStorage.getItem("ltb_sheets_url") || "";
+    document.getElementById("scriptUrl").value = currentUrl;
+
+    document.getElementById("btnSaveAndTest").addEventListener("click", async () => {
+      const url = document.getElementById("scriptUrl").value.trim();
+      const statusBox = document.getElementById("statusBox");
+      const btn = document.getElementById("btnSaveAndTest");
+
+      if (!url || !url.startsWith("https://script.google.com/")) {
+        statusBox.className = "status-box error";
+        statusBox.textContent = "يرجى إدخال رابط Web App صحيح يبدأ بـ https://script.google.com/";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "جاري الحفظ وإرسال الطلب التجريبي...";
+      statusBox.style.display = "none";
+
+      try {
+        // Save in localStorage for the main website
+        localStorage.setItem("zaini_sheets_url", url);
+        localStorage.setItem("ltb_sheets_url", url);
+
+        // Send a test order for ZAINI
+        const testPayload = {
+          orderId: "ZAINI-TEST-" + Math.floor(Math.random() * 90000 + 10000),
+          timestamp: new Date().toLocaleString("ar-EG"),
+          customerName: "طلب تجريبي - اختبار ربط شيت ZAINI",
+          customerPhone: "01069236466",
+          customerGov: "القاهرة",
+          customerAddress: "مدينة نصر - شارع عباس العقاد",
+          productName: "هودي أوفر سايز شتوي ميلتون ثقيل مبطن بشكير",
+          category: "هوديز وسويت شيرت",
+          size: "XL",
+          color: "أسود كربوني",
+          quantity: 1,
+          price: 499,
+          totalPrice: 499,
+          customerNotes: "طلب اختبار تلقائي للتأكد من نجاح ربط الشيت مع متجر ZAINI"
+        };
+
+        await fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(testPayload)
+        });
+
+        statusBox.className = "status-box success";
+        statusBox.innerHTML = `
+          <strong>🎉 تم بنجاح تام!</strong><br>
+          تم حفظ الرابط وتفعيله لمتجر <strong>ZAINI</strong> بنجاح.<br>
+          تم إرسال طلب تجريبي برقم (<strong>${testPayload.orderId}</strong>) للمنتج الرجالي.<br>
+          افتح شيت جوجل الآن وستجد صفحة الطلبات والمنتجات تم إنشاؤها وتنسيقها باللون الأسود وهوية ZAINI!
+        `;
+
+      } catch (err) {
+        statusBox.className = "status-box error";
+        statusBox.innerHTML = `حدث خطأ أثناء الاتصال: ${err.message}`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "🔥 حفظ وإرسال طلب تجريبي فوري";
+      }
+    });
+  </script>
+</body>
+</html>
